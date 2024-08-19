@@ -1,5 +1,29 @@
-import mongoose, { Schema } from "mongoose"
+// import mongoose, { Schema } from "mongoose"
 
+
+// const messageSchema = new Schema(
+//   {
+//     senderId: {
+//       type: Schema.Types.ObjectId,
+//       ref: 'User',
+//       required: true,
+//     },
+//     receiverId: {
+//       type: Schema.Types.ObjectId,
+//       ref: 'User',
+//       required: true,
+//     },
+//     message: {
+//       type: String,
+//       required: true,
+//     },
+//   },
+//   { timestamps: true }
+// );
+
+// export const Message = mongoose.model('Message', messageSchema);
+
+import mongoose, { Schema } from "mongoose";
 
 const messageSchema = new Schema(
   {
@@ -8,9 +32,9 @@ const messageSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    receiverId: {
+    conversationId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Conversation',
       required: true,
     },
     message: {
@@ -22,5 +46,4 @@ const messageSchema = new Schema(
 );
 
 export const Message = mongoose.model('Message', messageSchema);
-
 

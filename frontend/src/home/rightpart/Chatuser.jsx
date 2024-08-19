@@ -8,9 +8,16 @@ function Chatuser() {
   const {selectedConversation}= useConversation();
   const {onlineUsers} = useSocketContext();
   const getUserOnlineStatus= (userId)=>{
-    return onlineUsers.includes(userId)?"online":"offline";
+    return (selectedConversation.members.some(member => onlineUsers.includes(member._id)))?"online":"offline";
   }
-  const isOnline = onlineUsers.includes(selectedConversation._id)
+
+  console.log(selectedConversation);
+  
+
+  // if(selectedConversation.isGroup && getUserOnlineStatus("hbdkas")=="online"){
+  //   getUserOnlineStatus="some members online"
+  // }
+  const isOnline = selectedConversation.members.some(member => onlineUsers.includes(member._id));
   
   return (
     <div className='flex bg-slate-700 rounded-xl h-[8vh] duration-300 p-2 cursor-pointer space-x-4'>
@@ -25,8 +32,8 @@ function Chatuser() {
     </h1>
     <span className=''>
       
-     {
-      getUserOnlineStatus(selectedConversation._id)
+     {selectedConversation.isGroup?
+      getUserOnlineStatus(selectedConversation._id)=="online"?"some members online":"Offiline memebrs": getUserOnlineStatus(selectedConversation._id)
      }
       
       </span>

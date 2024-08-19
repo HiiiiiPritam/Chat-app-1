@@ -11,11 +11,11 @@ function useGetAllUsers() {
         setLoading(true)
         try {
           const token = Cookies.get("jwtChatApp");
-          const response = await axios.get(`/api/user/allUsers`
+          const response = await axios.get(`/api/v2/group/getAllConversations`
         );
 
           if(response){
-            SetAllUsers(response.data.filteredUsers)
+            SetAllUsers(response.data.conversations)
           }
           setLoading(false)
 

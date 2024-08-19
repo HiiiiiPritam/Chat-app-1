@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import userRoutes from './routes/user.js'
 import messageRoutes from './routes/message.js'
+import v2Routes from './routes/group.js'
 import { app, server } from "./SocletIo/server.js";
 
 
@@ -31,6 +32,8 @@ try {
 
 app.use('/api/user',userRoutes);
 app.use('/api/message',messageRoutes)
+app.use('/api/v2/group',v2Routes)
+
 
 server.listen(port, ()=>{
   console.log(`server is running at port ${port}`);

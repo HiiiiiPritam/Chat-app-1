@@ -5,7 +5,6 @@ import useGetAllUsers from '../../context/useGetAllUsers';
 const UserList = () => {
 
   const [allUsers, loading]= useGetAllUsers();
-
   
   return (
     <div className='py-4 overflow-y-auto max-h-[92dvh]'>
@@ -13,7 +12,7 @@ const UserList = () => {
       "Loading ..."
       :
       allUsers.map((us, index)=>
-        <User key={index} user={us}/>
+        <User key={index} conversation={us}/>
       )
       }
 

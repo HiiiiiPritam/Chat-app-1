@@ -2,16 +2,18 @@ import React from "react";
 import { useConversation } from "../../zustand/useConversation";
 import { useSocketContext } from "../../context/socketContext";
 
-function User({ user }) {
+function User({ conversation }) {
   const { setSelectedConversation, selectedConversation } = useConversation();
-  const isSelected = selectedConversation?._id == user._id;
+  const isSelected = selectedConversation?._id == conversation._id;
 
   const {socket,onlineUsers} = useSocketContext()
 
-  const isOnline = onlineUsers.includes(user._id)
+
+  // Check if any member of the conversation is online
+  const isOnline = conversation.members.some(member => onlineUsers.includes(member._id));
   return (
     <div
-      onClick={() => setSelectedConversation(user)}
+      onClick={() => setSelectedConversation(conversation)}
       className={`hover:bg-slate-600 duration-300 ${
         isSelected ? "bg-slate-700" : ""
       }`}
@@ -23,8 +25,8 @@ function User({ user }) {
           </div>
         </div>
         <div>
-          <h1 className="cursor-pointer ">{user.fullname}</h1>
-          <span className="">{user.email}</span>
+          <h1 className="cursor-pointer ">{conversation.fullname}</h1>
+          <span className="">{conversation.email}</span>
         </div>
       </div>
     </div>
