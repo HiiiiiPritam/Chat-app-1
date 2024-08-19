@@ -9,9 +9,9 @@ import {useAuth} from '../../context/Authprovider.jsx'
 function Right() {
   const {selectedConversation,setSelectedConversation}= useConversation()
   ///could not understand//////////////////////////
-  useEffect(()=>{
-    return setSelectedConversation(null)
-  },[setSelectedConversation])
+  // useEffect(()=>{
+  //   return setSelectedConversation(null)
+  // },[setSelectedConversation])
   return (
     <div className="w-4/5 bg-slate-600  flex flex-col border-l-4 border-slate-200">
     <div>

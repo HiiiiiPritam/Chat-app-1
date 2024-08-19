@@ -13,10 +13,6 @@ function Chatuser() {
 
   console.log(selectedConversation);
   
-
-  // if(selectedConversation.isGroup && getUserOnlineStatus("hbdkas")=="online"){
-  //   getUserOnlineStatus="some members online"
-  // }
   const isOnline = selectedConversation.members.some(member => onlineUsers.includes(member._id));
   
   return (
@@ -28,7 +24,7 @@ function Chatuser() {
   </div>
   <div className='text-white'>
   <h1 className="cursor-pointer text-xl">
-      {selectedConversation.fullname}
+      {selectedConversation.fullname?selectedConversation.fullname:selectedConversation.members[0].fullname}
     </h1>
     <span className=''>
       

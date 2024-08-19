@@ -5,5 +5,7 @@ export const useConversation = create((set) => ({
   setSelectedConversation: (selectedConversation) => set({selectedConversation}),
 
   messages:[],
-  setMessage:(messages)=>set({messages})
+  setMessage:(messages)=>set({messages}),
+  refreshConversations: false,
+  toggleRefreshConversations: () => set((state) => ({ refreshConversations: !state.refreshConversations })),
 }))

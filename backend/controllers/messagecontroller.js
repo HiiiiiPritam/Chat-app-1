@@ -174,22 +174,27 @@ export const createGroup = async (req, res) => {
     }
 
     // Add the admin to the members array if not already included
-    if (!members.includes(adminId.toString())) {
-      members.push(adminId);
+    const formattedMembers = members.map(member => member.toString());
+
+    // Add the admin to the members array if not already included
+    if (!formattedMembers.includes(adminId.toString())) {
+      formattedMembers.push(adminId.toString());
     }
+
+    
 
     // Create the group conversation
     const newGroup = new Conversation({
       groupName,
-      members,
-      isGroup:true,
-      admin:adminId
+      members: formattedMembers,
+      isGroup: true,
+      admin: adminId,
     });
 
     await newGroup.save();
 
     // Emit an event to notify members that they've been added to a group (optional)
-    members.forEach(memberId => {
+    formattedMembers.forEach(memberId => {
       const memberSocketId = getReceiverSocketId(memberId);
       if (memberSocketId) {
         io.to(memberSocketId).emit("addedToGroup", newGroup);

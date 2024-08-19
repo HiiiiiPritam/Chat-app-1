@@ -8,42 +8,46 @@ export const getAllConversations = async (req, res) => {
   try {
     // Find all conversations where the user is a member
     const conversations = await Conversation.find({ members: userId })
-      .populate("members");
+      .populate("members"); // This should populate the members with user data
+
+    // Log the conversations to check if the members are populated
 
     // Format the conversations for the frontend
     const formattedConversations = conversations.map(conversation => {
       let displayName;
       let email;
+
       if (conversation.isGroup) {
         displayName = conversation.groupName;
-        email="Group";
+        email = "Group";
       } else {
         // Get the other user's name (not the current user)
         const otherUser = conversation.members.find(member => member._id.toString() !== userId.toString());
-        displayName = otherUser ? otherUser.fullname : "self User";
-        email= otherUser?otherUser.email :"self Email";
+        displayName = otherUser ? otherUser.fullname : "Self";
+        email = otherUser ? otherUser.email : "Self Email";
       }
 
-      let memberarr = conversation.members
-          .filter(member => member._id.toString() !== userId.toString())
+      // Log the members array to ensure it's correctly 
 
-     
+      // Filter out the current user from the members list
+      const membersList = conversation.members.filter(member => member._id.toString() !== userId.toString());
 
       return {
         _id: conversation._id,
         fullname: displayName,
         isGroup: conversation.isGroup,
         email,
-        members:memberarr
+        members: membersList // This should now return all members except the current user
       };
     });
 
     res.status(200).json({ conversations: formattedConversations });
   } catch (error) {
-    console.error(error);
+    console.error("Error in getAllConversations:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 export const getConvoMessage = async (req, res) => {
   const { conversationId } = req.params;
