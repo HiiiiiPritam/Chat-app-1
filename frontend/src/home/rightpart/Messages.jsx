@@ -3,12 +3,14 @@ import Message from './Message'
 import useGetMessage from '../../context/useGetMessage.js'
 import Loading from '../../components/Loading.jsx';
 import useGetMessageSocket from '../../context/useGetMessageSocket.jsx';
+import useJoinRoom from '../../context/useJoinRoomsOnConnection.js';
 
 function Messages() {
 
   const {loading , messages} = useGetMessage()
   //////////how is this thing wroking//////////////
    useGetMessageSocket()
+   useJoinRoom();
 
   const lastmessageRef= useRef();
 

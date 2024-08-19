@@ -7,8 +7,9 @@ import cookieParser from "cookie-parser";
 
 import userRoutes from './routes/user.js'
 import messageRoutes from './routes/message.js'
+import v2Routes from './routes/group.js'
 import { app, server } from "./SocletIo/server.js";
-
+import V3routes from "./routes/AddUserRoutes.js"
 
 
 dotenv.config()
@@ -31,6 +32,9 @@ try {
 
 app.use('/api/user',userRoutes);
 app.use('/api/message',messageRoutes)
+app.use('/api/v2/group',v2Routes)
+app.use('/api/v3',V3routes)
+
 
 server.listen(port, ()=>{
   console.log(`server is running at port ${port}`);

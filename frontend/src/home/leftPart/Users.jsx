@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import User from './User';
 import useGetAllUsers from '../../context/useGetAllUsers';
+import { useConversation } from '../../zustand/useConversation';
 
 const UserList = () => {
+
+  const { setSelectedConversation,selectedConversation ,toggleRefreshConversations} = useConversation();
 
   const [allUsers, loading]= useGetAllUsers();
 
@@ -13,7 +16,7 @@ const UserList = () => {
       "Loading ..."
       :
       allUsers.map((us, index)=>
-        <User key={index} user={us}/>
+        <User key={index} conversation={us}/>
       )
       }
 

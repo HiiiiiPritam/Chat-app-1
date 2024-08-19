@@ -13,7 +13,7 @@ function useGetMessage() {
         setLoading(true);
         try {
           const response = await axios.get(
-            `/api/message/get/${selectedConversation._id}`
+            `/api/v2/group/getConversationMessages/${selectedConversation._id}`
           );
 
           setMessage(response.data)

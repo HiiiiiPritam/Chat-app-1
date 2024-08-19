@@ -13,7 +13,7 @@ function useSendMessage() {
         setLoading(true);
         try {
           const response = await axios.post(
-            `/api/message/send/${selectedConversation._id}`,{message}
+            `/api/v2/group/send2/${selectedConversation._id}`,{message}
           );
           console.log(response.data);
           

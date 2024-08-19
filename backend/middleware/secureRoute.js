@@ -16,7 +16,6 @@ const secureRoute = async (req, res, next)=>{
     const user= await User.findById(decoded.userId).select("-password");
     if(!user){
       return res.status(401).json({error:"No user found authorization denied"})
-
     }
 
     req.user= user;
